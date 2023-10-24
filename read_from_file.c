@@ -11,7 +11,7 @@ int main() {
     int buffer_size = 100;
     char line_buffer[buffer_size];
     while (fgets(line_buffer, buffer_size, file) != NULL) {
-        printf("%d\n", atoi(line_buffer));
+        printf("%s", line_buffer);
     }
 
     fclose(file);
