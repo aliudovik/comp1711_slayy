@@ -10,7 +10,14 @@ typedef struct {
 } FITNESS_DATA;
 
 // Define any additional variables here
-
+char date[11];
+char time[6];
+char steps[10];
+int a;
+int i;
+int k;
+char *records[100];
+FITNESS_DATA record [100];
 
 
 // This is your helper function. Do not change it in any way.
@@ -43,6 +50,8 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
+
+    // Reading the file
     char filename [] = "FitnessData_2023.csv";
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
@@ -50,40 +59,39 @@ int main() {
         return 1;
     }
     
-    int a = 0;
-    int record_size = 100;
-    char record[record_size];
-    while (fgets(record, record_size, file) != NULL) {
-        a++;
-    //    tokeniseRecord(line_buffer, ",", date, time, steps);
-    //    FITNESS_DATA one;
-    //    strcpy(one.date, date);
-    //    strcpy(one.time, time);
-    //    strcpy(one.steps, steps);
-    //    printf("%s", one.date);
+    /* Populating new array "records" with all of the lines from the file:
+       (Additional literature was used while completing this step:
+       RishabhPrabhu 2018. Dynamic Memory Allocation in C using malloc(), calloc(), free() and realloc(). [Online]. 
+       [Accessed 30 October 2023]. Available from: 
+       https://www.geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/). */
+    int buffer_size = 100;
+    char line_buffer[buffer_size];
+    while(fgets(line_buffer, buffer_size, file) != NULL)
+    {
+        records[i] = malloc(buffer_size);
+        strcpy(records[i], line_buffer);
+        i++;
     }
 
-    //char record[21] = "2023-09-01,07:30,300";
-    char date[11];
-    char time[6];
-    char steps[10];  // Large enough to hold a typical step count as a string
+    // Splitting each record and storing it in the appropriate typedef
+    while(a < i){
+        tokeniseRecord(records[a], ",", date, time, steps);
+        strcpy(record[a].date, date);
+        strcpy(record[a].time, time);
+        record[a].steps = atoi(steps);
+        a++;
+    }
 
-    int stepsint;
+    // Printing the number of records in the file
+    printf("Number of records in file: %d\n", i);
+
+    // Printing the first three rows
+    while (k < 3) {
+        printf("%s/%s/%d\n", record[k].date, record[k].time, record[k].steps);
+        k++;
+    }
     
-    tokeniseRecord(record, ",", date, time, steps);
-    
-    printf("Date: %s\n", date);
-    printf("Time: %s\n", time);
-    printf("Steps: %s\n", steps);
-
-    struct FITNESS_DATA
-
-    // Convert the steps string to an integer
-    stepsint = atoi(steps);
-    printf("Steps as an integer: %d\n", stepsint);
-    
-    printf("Number of records in file: %d\n", a);
-
+    // Closing the file
     fclose(file);
     return 0;
 
