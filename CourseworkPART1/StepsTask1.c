@@ -51,6 +51,16 @@ void tokeniseRecord(const char *input, const char *delimiter,
 // Complete the main function
 int main() {
 
+    printf("Menu Options:\n
+    A: Specify the filename to be imported\n
+    B: Display the total number of records in the file\n
+    C: Find the date and time of the timeslot with the fewest steps\n
+    D: Find the date and time of the timeslot with the largest number of steps\n
+    E: Find the mean step count of all the records in the file\n
+    F: Find the longest continuous period where the step count is above 500 steps\n
+    Q: Quit\n
+    Enter choice:");
+    
     // Reading the file
     char filename [] = "FitnessData_2023.csv";
     FILE *file = fopen(filename, "r");
@@ -83,13 +93,13 @@ int main() {
     }
 
     // Printing the number of records in the file
-    printf("Number of records in file: %d\n", i);
+    //printf("Number of records in file: %d\n", i);
 
     // Printing the first three rows
-    while (k < 3) {
-        printf("%s/%s/%d\n", record[k].date, record[k].time, record[k].steps);
-        k++;
-    }
+    //while (k < 3) {
+    //    printf("%s/%s/%d\n", record[k].date, record[k].time, record[k].steps);
+    //    k++;
+    //}
     
     // Closing the file
     fclose(file);
